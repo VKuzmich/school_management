@@ -1,6 +1,3 @@
-#require '../db/seeds/teachers'
-
-
 if Teacher.count.zero?
   puts 'Teachers seeding'
   Teacher.create!(first_name: 'Gosha', last_name: 'Krit', description: 'Senior Teacher')
