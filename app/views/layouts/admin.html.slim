@@ -8,8 +8,8 @@ html
     = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
   body
-  = render 'admin/shared/main_menu'
-  .container
-    .row
-      .col-md-12
-        = yield
+    = render 'admin/shared/main_menu'
+    .container
+      .row
+        .col-md-12
+          = yield
