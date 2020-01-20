@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/aleksevd/breadcrumbs_on_rails.git
-  revision: d13564567fd6ba5dcc338a5cd6093a1b994c7bf5
-  specs:
-    breadcrumbs_on_rails (2.3.1)
-
-GIT
   remote: https://github.com/sinatra/sinatra.git
   revision: a4dd24add24f2dd0e7299b9e68e12038138294d3
   specs:
@@ -97,6 +91,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     bootstrap-select-rails (1.13.8)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
     byebug (11.0.1)
     carrierwave (2.0.2)
@@ -358,7 +353,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap-sass
   bootstrap-select-rails
-  breadcrumbs_on_rails!
+  breadcrumbs_on_rails
   byebug
   carrierwave
   chromedriver-helper
