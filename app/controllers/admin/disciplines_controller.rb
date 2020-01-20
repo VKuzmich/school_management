@@ -29,7 +29,7 @@ class Admin::DisciplinesController < Admin::BaseController
 
   def update
     if @discipline.update(discipline_params)
-      redirect_to admin_discipline_path, notice: "Discipline was edited"
+      redirect_to admin_disciplines_path, notice: "Discipline was edited"
     else
       add_breadcrumb "Edit Discipline #{@discipline.name}", [:admin, @discipline]
 
@@ -40,7 +40,7 @@ class Admin::DisciplinesController < Admin::BaseController
 
   def destroy
     if @discipline.destroy
-      redirect_to admin_discipline_path, notice: 'Discipline was successfully deleted'
+      redirect_to admin_disciplines_path, notice: 'Discipline was successfully deleted'
     else
       redirect_to admin_disciplines_path, alert: 'Could not delete discipline'
     end
