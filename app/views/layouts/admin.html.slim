@@ -7,16 +7,18 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+
   body
     = render 'admin/shared/main_menu'
     .container
+      - if current_admin
+        .row
+          .col-md-12.col-sm-12
+            ol.breadcrumb
+              = render_breadcrumbs tag: :li, separator: ""
       .row
-        .col-md-12
-          ol.breadcrumb
-            = render_breadcrumbs tag: :li, separator: ""
-      .row
-        .col-md-12
+        .col-md-12.col-sm-12
           = render_flash
       .row
-        .col-md-12
+        .col-md-12.col-sm-12
           = yield
