@@ -16,3 +16,11 @@ if Discipline.count.zero?
     Discipline.create!(name: name)
   end
 end
+
+if Course.count.zero?
+  puts 'seeding course'
+  Course.create!(name: 'HardMath', description: '')
+end
+
+
+

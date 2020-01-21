@@ -24,14 +24,14 @@ class Admin::TeachersController < Admin::BaseController
   end
 
   def edit
-    add_breadcrumb "Edit Teacher #{@teacher.first_name} #{@teacher.last_name}", [:edit, :admin, @teacher]
+    add_breadcrumb "Edit Teacher #{@teacher.decorate.full_name}", [:edit, :admin, @teacher]
   end
 
   def update
     if @teacher.update(teacher_params)
       redirect_to admin_teachers_path, notice: "Teacher was edited"
     else
-      add_breadcrumb "Edit Teacher #{@teacher.first_name} #{@teacher.last_name}", [:admin, @teacher]
+      add_breadcrumb "Edit Teacher #{@teacher.decorate.full_name}", [:admin, @teacher]
 
       flash.now[:alert] = 'Could not edit teacher'
       render :edit

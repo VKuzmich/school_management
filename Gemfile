@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 gem 'rails', '~> 5.2.4'
 
+gem 'acts_as_list'
 gem 'best_in_place'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass'
