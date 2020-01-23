@@ -11,7 +11,7 @@ class Admin::CoursesController < Admin::BaseController
     add_breadcrumb "Новый Курс", new_admin_course_path
 
     @course = Course.new
-    build_sections
+
   end
 
   def create
@@ -21,7 +21,6 @@ class Admin::CoursesController < Admin::BaseController
       redirect_to admin_courses_path, notice: 'Курс успешно создан'
     else
       add_breadcrumb "Новый Курс", new_admin_course_path
-      build_sections
 
       flash.now[:alert] = 'Не удалось создать Курс'
       render :new
@@ -29,7 +28,6 @@ class Admin::CoursesController < Admin::BaseController
   end
 
   def edit
-    build_sections
 
     add_breadcrumb "Редактировать #{@course.name}", [:edit, :admin, @course]
   end
@@ -39,9 +37,8 @@ class Admin::CoursesController < Admin::BaseController
       redirect_to admin_courses_path, notice: 'Курс успешно изменен'
     else
       add_breadcrumb "Редактировать #{@course.name}", [:edit, :admin, @course]
-      build_sections
 
-      flash.now[:alert] = 'Не удалось изменить Курс'
+      flash.now[:alert] = 'Не удалось изменить Курс', [:admin, @course]
       render :edit
     end
   end
@@ -64,13 +61,11 @@ class Admin::CoursesController < Admin::BaseController
     @main_menu[:courses][:active] = true
   end
 
-  def build_sections
-    @course.sections.build if @course.sections.empty?
-  end
+  #def build_sections
+  #  @course.sections.build if @course.sections.empty?
+  #end
 
   def course_params
-    params.require(:course).permit(:name, :description, :teacher_id, :main_image,
-                                   :main_image_cache, discipline_ids: [],
-                                   sections_attributes: [:_destroy, :id, :name, :description, :position])
+    params.require(:course).permit(:name, :description, :teacher_id, discipline_ids: [])
   end
 end
