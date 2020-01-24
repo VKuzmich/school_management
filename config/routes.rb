@@ -18,5 +18,11 @@ Rails.application.routes.draw do
     resources :lessons, only: [] do
       post :sort, on: :collection
     end
+
+    namespace :api do
+      namespace :lessons do
+        resource :mass_update, only: :create
+      end
+    end
   end
 end

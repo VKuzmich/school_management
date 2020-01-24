@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(version: 2020_01_21_175411) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "section_id"
     t.index ["course_id"], name: "index_lessons_on_course_id"
     t.index ["position"], name: "index_lessons_on_position"
+    t.index ["section_id"], name: "index_lessons_on_section_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -92,5 +94,6 @@ ActiveRecord::Schema.define(version: 2020_01_21_175411) do
   add_foreign_key "discipline_courses", "courses"
   add_foreign_key "discipline_courses", "disciplines"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "lessons", "sections"
   add_foreign_key "sections", "courses"
 end

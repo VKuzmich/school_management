@@ -1,16 +1,12 @@
 class Admin::LessonsController < Admin::BaseController
-
-  skip_before_action :set_active_main_menu_item, only: :sort
-
-  before_action :set_course, except: :sort
+  before_action :set_course_and_breadcrumbs, except: :sort
   before_action :set_lesson, only: [:edit, :update, :destroy]
 
   def index
-    @lessons = @course.lessons.order(:position).page(params[:page])
   end
 
   def new
-    add_breadcrumb "Новый Курс", [:new, :admin, @course, :lesson]
+    add_breadcrumb "Новое Занятие", [:new, :admin, @course, :lesson]
 
     @lesson = @course.lessons.build
   end
@@ -19,11 +15,11 @@ class Admin::LessonsController < Admin::BaseController
     @lesson = @course.lessons.build(lesson_params)
 
     if @lesson.save
-      redirect_to [:admin, @course, :lessons], notice: 'Lesson успешно создан'
+      redirect_to after_save_path, notice: 'Занятие успешно создано'
     else
-      add_breadcrumb "Новый Lesson", [:new, :admin, @course, :lesson]
+      add_breadcrumb "Новое Занятие", [:new, :admin, @course, :lesson]
 
-      flash.now[:alert] = 'Не удалось создать Lesson'
+      flash.now[:alert] = 'Не удалось создать Занятие'
       render :new
     end
   end
@@ -34,35 +30,28 @@ class Admin::LessonsController < Admin::BaseController
 
   def update
     if @lesson.update(lesson_params)
-      redirect_to [:admin, @course, :lessons], notice: 'Lesson успешно изменен'
+      redirect_to after_save_path, notice: 'Занятие успешно изменено'
     else
       add_breadcrumb "Редактировать #{@lesson.name}", [:edit, :admin, @course, @lesson]
-
-      flash.now[:alert] = 'Не удалось изменить Lesson', [:admin, @lesson]
+      flash.now[:alert] = 'Не удалось изменить Занятие'
       render :edit
     end
   end
 
   def destroy
     if @lesson.destroy
-      redirect_to [:admin, @course, :lessons], notice: 'Lesson успешно удален'
+      redirect_to [:admin, @course, :lessons], notice: 'Занятие успешно удалено'
     else
-      redirect_to [:admin, @course, :lessons], alert: "Не удалось удалить Lesson"
+      redirect_to [:admin, @course, :lessons], alert: 'Не удалось удалить Занятие'
     end
-  end
-
-  def sort
-    Lesson.reorder(params[:lesson])
-
-    head :no_content
   end
 
   private
 
-  def set_course
-    @course = Course.find(params[:course_id ])
+  def set_course_and_breadcrumbs
+    @course = Course.find(params[:course_id])
 
-    add_breadcrumb 'Course', admin_courses_path
+    add_breadcrumb 'Курсы', :admin_courses_path
     add_breadcrumb @course.name, [:admin, @course, :lessons]
   end
 
@@ -75,6 +64,16 @@ class Admin::LessonsController < Admin::BaseController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description)
+    params.require(:lesson).permit(:name, :description, :section_id, :main_image,
+                                   :main_image_cache, :stop_lesson, :free, :video, :without_homework,
+                                   :homework)
+  end
+
+  def after_save_path
+    if params[:commit] == 'Сохранить и продолжить'
+      [:edit, :admin, @course, @lesson]
+    else
+      [:admin, @course, :lessons]
+    end
   end
 end

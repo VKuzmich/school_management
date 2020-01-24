@@ -29,7 +29,7 @@ gem 'state_machines-activerecord'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'therubyracer', :platforms => :ruby
-
+gem 'tinymce-rails'
 gem 'gravatar_image_tag'
 gem 'whenever'
 gem 'sidekiq'

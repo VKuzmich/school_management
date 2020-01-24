@@ -1,4 +1,4 @@
-tr id="lesson_#{lesson.id}"
+tr.lesson data-id=lesson.id
   td
     span.handle.glyphicon.glyphicon-magnet
   td
@@ -7,6 +7,6 @@ tr id="lesson_#{lesson.id}"
         span.glyphicon.glyphicon-pencil aria-hidden="true"
       = link_to [:admin, @course, lesson], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Действительно хотите удалить?' } do
         span.glyphicon.glyphicon-trash aria-hidden="true"
+  td.position= lesson.position
   td= lesson.name
   td= lesson.description
-
