@@ -52,9 +52,7 @@ class Admin::LessonsController < Admin::BaseController
   end
 
   def sort
-    params[:lesson].each_with_index do |id, index|
-      Lesson.find(id).update!(position: index + 1)
-    end
+    Lesson.reorder(params[:lesson])
 
     head :no_content
   end
