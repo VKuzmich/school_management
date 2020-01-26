@@ -30,6 +30,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'therubyracer', :platforms => :ruby
 gem 'tinymce-rails'
+gem 'tinymce-rails-imageupload'
 gem 'gravatar_image_tag'
 gem 'whenever'
 gem 'sidekiq'

@@ -9,7 +9,6 @@ table.table.table-striped
       th
       th Номер
       th Название
-      th Описание
 
   tbody.lessons_sortable data-update-url=admin_api_lessons_mass_update_path
     = render partial: 'section', collection: @course.sections.order(:position)
