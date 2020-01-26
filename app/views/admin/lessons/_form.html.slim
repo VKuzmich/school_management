@@ -2,7 +2,7 @@
   = f.input :name
   = f.association :section, collection: @course.sections.order(:position)
   = f.input :description, input_html: { class: 'tinymce', rows: 40, cols: 120 }
-  = tinymce
+  = tinymce(uploadimage_form_url: admin_api_lesson_tinymce_images_path(@lesson))
 
   .row
     .col-md-11.col-md-offset-3.button_box
