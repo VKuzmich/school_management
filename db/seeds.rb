@@ -1,3 +1,5 @@
+
+
 if Admin.count.zero?
   puts 'admin seeding'
   Admin.create!(email: 'luis@example.com', first_name: 'Luis', last_name: 'Adriano', password: '123123', password_confirmation: '123123')

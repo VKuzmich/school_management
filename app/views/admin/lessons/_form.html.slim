@@ -1,8 +1,10 @@
 = simple_form_for [:admin, @course, @lesson], wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
   = f.input :name
   = f.association :section, collection: @course.sections.order(:position)
+
   = f.input :description, input_html: { class: 'tinymce', rows: 40, cols: 120 }
-  = tinymce(uploadimage_form_url: admin_api_lesson_tinymce_images_path(@lesson))
+  = tinymce(uploadimage_form_url: admin_api_lesson_tinymce_images_path(@lesson)) if @lesson.persisted?
+
 
   .row
     .col-md-11.col-md-offset-3.button_box
